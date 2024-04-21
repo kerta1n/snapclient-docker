@@ -1,5 +1,5 @@
 # snapclient-docker
-Snapclient in Docker. I run this on two Le Potatoes that I converted from Armbian to Dietpi. Runs on basically anything Linux that can run Docker and has USB ports.
+Snapclient in Docker. I run this on two Le Potatoes that I converted from Armbian to Dietpi with Apple type-C to headphone jacks (👌 mini-DACs). Runs on basically anything Linux that can run Docker and has USB ports.
 
 # USAGE
 Volume-less container, so just `chmod +x start.sh` and `bash start.sh`
