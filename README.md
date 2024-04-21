@@ -19,5 +19,6 @@ SOUNDCARD: Run `aplay -L` on the host (don't use with `aplay -l`, snapclient ide
 Image/configurations are taken from https://github.com/Saiyato/snapclient_docker. Built on Alpine to keep image as small as possible
 
 # Librespot + Snapserver
-https://github.com/kerta1n/lssc
-https://hub.docker.com/r/kertain/lssc
+[Github Repo](https://github.com/kerta1n/lssc)
+
+[Dockerhub](https://hub.docker.com/r/kertain/lssc)
