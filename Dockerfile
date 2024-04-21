@@ -12,4 +12,4 @@ RUN apk add --no-cache bash snapcast-client=${SNAPCAST_VERSION} sed
 
 ENTRYPOINT ["snapclient"]
 
-CMD ["-h ${HOST}", "-s ${SOUNDCARD}"]
+CMD ["-h $HOST -s $SOUNDCARD"]
