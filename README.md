@@ -1,6 +1,8 @@
 # snapclient-docker
 Snapclient in Docker. I run this on two Le Potatoes that I converted from Armbian to Dietpi with Apple type-C to headphone jacks (👌 mini-DACs). Runs on basically anything Linux (container is multi-arch) that can run Docker and has USB ports.
 
+[Dockerhub](https://hub.docker.com/r/kertain/lssc)
+
 # USAGE
 Volume-less container, `wget https://raw.githubusercontent.com/kerta1n/snapclient-docker/main/compose.yml` and `docker compose up -d`
 
