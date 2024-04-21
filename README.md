@@ -19,3 +19,6 @@ Volume-less container, so just `chmod +x start.sh` and `bash start.sh`
 
 # Why didn't you create this in Docker Compose?
 Passing the -h flag when using environment variables didn't seem to work, thus rendering the container useless If someone can figure this out, please lmk in Issues.
+
+# Credits/info
+Image/configurations are taken from https://github.com/Saiyato/snapclient_docker. Built on Alpine to keep image as small as possible
