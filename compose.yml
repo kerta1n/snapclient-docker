@@ -1,0 +1,13 @@
+version: '3.9'
+services:
+    snapclient:
+        restart: unless-stopped
+        container_name: room_name
+        hostname: room_name
+        mac_address: so:me:ma:c:ad:dr
+         environment:
+            - HOST: snapserver.local
+            - SOUNDCARD: A_2
+        devices:
+            - /dev/snd
+        image: kertain/snapclient
