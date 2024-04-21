@@ -21,6 +21,9 @@ device /dev/snd: Just mounts your sound device so that it can see all of your so
 # Credits/info
 Image/configurations are taken from https://github.com/Saiyato/snapclient_docker. Built on Alpine to keep image as small as possible
 
+# Why didn't you use compose?
+F**k passing ENV into ENTRYPOINT. If you're able to fix this, please open a PR
+
 # Librespot + Snapserver
 [Github Repo](https://github.com/kerta1n/lssc)
 
