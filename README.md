@@ -9,7 +9,7 @@ hostname: Container's hostname. I would advise setting this to the room that thi
 
 mac-address: If you are running multiples of this container (which I would do if you can attach multiple soundcards), make this something different for each so that Snapserver recognizes the device after restarting if there is an update to Snapclient.
 
---device /dev/snd: Just mounts your sound device so that it can see all of your soundcards. This shouldn't break anything mounting the same device across multiple container deployments.
+device /dev/snd: Just mounts your sound device so that it can see all of your soundcards. This shouldn't break anything mounting the same device across multiple container deployments.
 
 HOST: Set this to the host of your Snapserver. If your network supports mDNS, use that, but be careful. Test by running `ping snapserver.domain` on any Linux/MacOS/Windows device. If no packet loss, use the domain name.
 
