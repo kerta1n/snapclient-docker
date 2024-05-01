@@ -1,7 +1,7 @@
 # snapclient-docker
 Snapclient in Docker. I run this on two Le Potatoes that I converted from Armbian to Dietpi with Apple type-C to headphone jacks (👌 mini-DACs). Runs on basically anything Linux (container is multi-arch) that can run Docker and has USB ports.
 
-[Dockerhub](https://hub.docker.com/r/kertain/lssc)
+[Dockerhub](https://hub.docker.com/r/kertain/snapclient-docker)
 
 # Usage
 Volume-less container, `wget https://raw.githubusercontent.com/kerta1n/snapclient-docker/main/compose.yml` and `docker compose up -d`
@@ -21,7 +21,7 @@ device /dev/snd: Just mounts your sound device so that it can see all of your so
 # Credits/info
 Image/configurations are taken from https://github.com/Saiyato/snapclient_docker. Built on Alpine to keep image as small as possible
 
-# Why didn't you use compose?
+# Why did you use `commands` instead of `environment`?
 F**k passing ENV into ENTRYPOINT. If you're able to fix this, please open a PR
 
 # Librespot + Snapserver
