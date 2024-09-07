@@ -4,8 +4,14 @@ services:
         restart: unless-stopped
         container_name: room_name
         hostname: room_name
-#        mac_address: so:me:ma:c:ad:dr
         devices:
             - /dev/snd
         image: kertain/snapclient:029
         command: snapclient -h snapserver.local -s A_2
+        networks:
+              default:
+                    mac_address: (generate some addr here, CRUCIAL if deploying multiple instances)
+
+networks:
+    default:
+        driver: bridge
