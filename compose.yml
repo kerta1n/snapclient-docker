@@ -7,5 +7,5 @@ services:
         mac_address: so:me:ma:c:ad:dr
         devices:
             - /dev/snd
-        image: kertain/snapclient:028
+        image: kertain/snapclient:029
         command: snapclient -h snapserver.local -s A_2
