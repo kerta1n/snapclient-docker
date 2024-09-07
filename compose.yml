@@ -4,7 +4,7 @@ services:
         restart: unless-stopped
         container_name: room_name
         hostname: room_name
-        mac_address: so:me:ma:c:ad:dr
+#        mac_address: so:me:ma:c:ad:dr
         devices:
             - /dev/snd
         image: kertain/snapclient:029
