@@ -21,18 +21,9 @@ device /dev/snd: Just mounts your sound device so that it can see all of your so
 # Credits/info
 Image/configurations are taken from https://github.com/Saiyato/snapclient_docker. Built on Alpine to keep image as small as possible
 
-# I am running this container across multiple physical machines with one instance per machine, why does Snapweb not show them all? It only shows whichever one has been recently restarted.
-This is because of Compose's networking config, which definitely could use some work for simple applications like this. You have to address each container with a bridge network, like so:
-```
-        networks:
-              default:
-                    mac_address: (generate some addr here)
-
-networks:
-    default:
-        driver: bridge
-```
-This issue WON'T happen across multiple Snapclient containers on one physical machine, however, since Docker's networking stack knows to auto assign them different MAC addresses (take a look at `docker network ls`/`inspect`)
+[//]: # I am running this container across multiple physical machines with one instance per machine, why does Snapweb not show them all? It only shows whichever one has been recently restarted.
+[//]: This is because of Compose's networking config, which definitely could use some work for simple applications like this. You have to address each container with a bridge network, like so:
+[//]: This issue WON'T happen across multiple Snapclient containers on one physical machine, however, since Docker's networking stack knows to auto assign them different MAC addresses (take a look at `docker network ls`/`inspect`)
 
 # Why did you use `commands` instead of `environment`?
 F**k passing ENV into ENTRYPOINT. If you're able to fix this, please open a PR
