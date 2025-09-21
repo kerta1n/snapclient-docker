@@ -31,7 +31,7 @@ HUGE THANK YOU to Bart Ribbers for maintaining the Alpine build of Snapcast. [Ba
 F**k passing ENV into ENTRYPOINT. If you're able to fix this, please open a PR
 
 # Snapserver
-[Github Repo](https://github.com/kerta1n/snapserver)
+[Github Repo](https://github.com/kerta1n/snapserver-docker)
 
-[Dockerhub](https://hub.docker.com/r/kertain/snapserver)
+[Dockerhub](https://hub.docker.com/r/kertain/snapserver-docker)
 
