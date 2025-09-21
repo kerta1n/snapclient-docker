@@ -2,6 +2,10 @@ version: '3.9'
 services:
     snapclient:
         restart: unless-stopped
+
+        mem_reservation: "10M"
+        mem_limit: "750M"
+
         container_name: room_name
         hostname: room_name
         devices:
