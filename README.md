@@ -32,3 +32,5 @@ F**k passing ENV into ENTRYPOINT. If you're able to fix this, please open a PR
 [Github Repo](https://github.com/kerta1n/lssc)
 
 [Dockerhub](https://hub.docker.com/r/kertain/lssc)
+
+HUGE THANK YOU to Bart Ribbers for maintaining the Alpine build of Snapcast. [Bart Ribbers' Gitlab](https://gitlab.com/PureTryOut)
