@@ -19,7 +19,9 @@ device /dev/snd: Just mounts your sound device so that it can see all of your so
 -s: Run `aplay -L` on the host (don't use with `aplay -l`, snapclient identifies per `-L`) to find your soundcard. You can typically test this by plugging in each soundcard one at a time and looking at `dmesg`.
 
 # Credits/info
-Image/configurations are taken from https://github.com/Saiyato/snapclient_docker. Built on Alpine to keep image as small as possible
+Image/configurations are taken from/inspired by https://github.com/Saiyato/snapclient_docker. Built on Alpine to keep image as small as possible
+
+HUGE THANK YOU to Bart Ribbers for maintaining the Alpine build of Snapcast. [Bart Ribbers' Gitlab](https://gitlab.com/PureTryOut)
 
 [//]: # I am running this container across multiple physical machines with one instance per machine, why does Snapweb not show them all? It only shows whichever one has been recently restarted.
 [//]: This is because of Compose's networking config, which definitely could use some work for simple applications like this. You have to address each container with a bridge network, like so:
@@ -28,9 +30,8 @@ Image/configurations are taken from https://github.com/Saiyato/snapclient_docker
 # Why did you use `commands` instead of `environment`?
 F**k passing ENV into ENTRYPOINT. If you're able to fix this, please open a PR
 
-# Librespot + Snapserver
-[Github Repo](https://github.com/kerta1n/lssc)
+# Snapserver
+[Github Repo](https://github.com/kerta1n/snapserver)
 
-[Dockerhub](https://hub.docker.com/r/kertain/lssc)
+[Dockerhub](https://hub.docker.com/r/kertain/snapserver)
 
-HUGE THANK YOU to Bart Ribbers for maintaining the Alpine build of Snapcast. [Bart Ribbers' Gitlab](https://gitlab.com/PureTryOut)
