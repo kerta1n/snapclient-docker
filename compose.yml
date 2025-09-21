@@ -9,7 +9,7 @@ services:
         hostname: room_name
         devices:
             - /dev/snd
-        image: kertain/snapclient:029
+        image: kertain/snapclient:032-3
         command: snapclient -h snapserver.local -s A_2
         networks:
               default:
