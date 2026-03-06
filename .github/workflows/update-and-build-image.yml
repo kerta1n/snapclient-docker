@@ -1,0 +1,109 @@
+name: Update and build Docker image
+
+on:
+  schedule:
+    - cron: '0 7 * * 4'   # every Thursday at 07:00 UTC
+  workflow_dispatch:        # allow manual trigger
+
+jobs:
+  check-update:
+    runs-on: ubuntu-slim
+    permissions:
+      contents: write
+    outputs:
+      bumped: ${{ steps.compare.outputs.bumped }}
+      version: ${{ steps.compare.outputs.version }}
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Fetch latest snapcast-client version from Alpine
+        id: get_version
+        run: |
+          # Version is wrapped in <strong> tags on the Alpine package page
+          VERSION=$(curl -fsSL "https://pkgs.alpinelinux.org/package/edge/community/x86/snapcast-client" \
+            | grep -oP '(?<=<strong>)[0-9]+.[0-9]+.[0-9]+-r[0-9]+(?=</strong>)' \
+            | head -n1)
+
+          if [ -z "$VERSION" ]; then
+            echo "ERROR: Could not parse version from Alpine package page." >&2
+            exit 1
+          fi
+
+          echo "Latest version: $VERSION"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Compare versions and update Dockerfile if changed
+        id: compare
+        run: |
+          CURRENT=$(grep -oP '(?<=SNAPCAST_VERSION=)[^\s"]+' Dockerfile | head -n1)
+          NEW="${{ steps.get_version.outputs.version }}"
+          echo "Current: $CURRENT / Latest: $NEW"
+
+          if [ "$CURRENT" = "$NEW" ]; then
+            echo "No update needed."
+            echo "bumped=false" >> "$GITHUB_OUTPUT"
+            echo "version=$CURRENT" >> "$GITHUB_OUTPUT"
+          else
+            sed -i "s/ARG SNAPCAST_VERSION=.*/ARG SNAPCAST_VERSION=${NEW}/" Dockerfile
+            git config user.name  "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add Dockerfile
+            git commit -m "chore: bump snapcast-client to ${NEW}"
+            git push
+            echo "bumped=true" >> "$GITHUB_OUTPUT"
+            echo "version=$NEW" >> "$GITHUB_OUTPUT"
+          fi
+
+  build:
+    needs: check-update
+    if: ${{ needs.check-update.outputs.bumped == 'true' || github.event_name == 'workflow_dispatch' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repo (with submodules)
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+          submodules: recursive
+
+      - name: Derive version tags
+        id: meta_version
+        run: |
+          VERSION="${{ needs.check-update.outputs.version }}"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          SHORT=$(echo "$VERSION" | grep -oP '^[0-9]+\.[0-9]+\.[0-9]+')
+          echo "short=$SHORT" >> "$GITHUB_OUTPUT"
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up QEMU (for multi-arch builds)
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and push image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile
+          platforms: linux/amd64,linux/arm64,linux/arm/v7
+          push: true
+          provenance: false
+          # Full alpine version tag (e.g. 0.34.0-r0), short tag (e.g. 0.34.0), and latest
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/snapclient-docker:${{ steps.meta_version.outputs.version }}
+            ghcr.io/${{ github.repository_owner }}/snapclient-docker:${{ steps.meta_version.outputs.short }}
+            ghcr.io/${{ github.repository_owner }}/snapclient-docker:latest
+          build-args: |
+            SNAPCAST_VERSION=${{ steps.meta_version.outputs.version }}
