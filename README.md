@@ -36,9 +36,9 @@ Device `/dev/snd`: Just mounts your sound device so that it can see all of your 
 1. `docker compose down --rmi all`
 2. `docker compose up -d`
 
-[//]: # I am running this container across multiple physical machines with one instance per machine, why does Snapweb not show them all? It only shows whichever one has been recently restarted.
+<!-- [//]: # I am running this container across multiple physical machines with one instance per machine, why does Snapweb not show them all? It only shows whichever one has been recently restarted.
 [//]: This is because of Compose's networking config, which definitely could use some work for simple applications like this. You have to set each container to use a bridge network.
-[//]: This issue WON'T happen across multiple Snapclient containers on one physical machine, however, since Docker's networking stack knows to auto assign them different MAC addresses (take a look at `docker network ls`/`inspect`)
+[//]: This issue WON'T happen across multiple Snapclient containers on one physical machine, however, since Docker's networking stack knows to auto assign them different MAC addresses (take a look at `docker network ls`/`inspect`) -->
 
 # Why did you use `commands` instead of `environment`?
 F**k passing ENV into ENTRYPOINT. If you're able to fix this, please open a PR
