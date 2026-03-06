@@ -1,5 +1,5 @@
 # snapclient-docker
-Extremely light container (Alpine base, 26.3MB image size on arm64!) to run a Snapcast server instance (with Snapweb).  
+Extremely light container (Alpine base, 26.3MB image size on arm64!) to run a Snapcast server instance.  
 
 I run this on two Le Potatoes that I converted from Armbian to Dietpi with Apple type-C to headphone jacks (👌 mini-DACs).  
 Runs on basically anything Linux that can run Docker and has USB ports.
