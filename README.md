@@ -25,7 +25,7 @@ This is a volume-less container, so just run `wget https://raw.githubusercontent
 
 `hostname`: Container's hostname. I would advise setting this to the room that this will be controlling so that it's easy to identify using `docker ps` Keep it the same as the container name to avoid confusion in the actual Snapcast webUI. This will only work if you have an unique MAC address configured as well.
 
-Device `/dev/snd`: Just mounts your sound device so that it can see all of your soundcards. This shouldn't break anything mounting the same device across multiple container deployments if you want attach multiple DACs (audio outputs) to the same host.
+Device `/dev/snd`: Just mounts your sound device so that it can see all of your soundcards. This shouldn't break anything mounting the same device across multiple container deployments _if_ you want attach multiple DACs (audio outputs) to the same host.
 
 ## command:
 -h : Set this to the host of your Snapserver. If your network supports mDNS, use that, but be careful. Test by running `ping snapserver.domain` on any Linux/MacOS/Windows device. If no packet loss, use the domain name.
