@@ -1,7 +1,7 @@
 services:
     snapclient:
         restart: unless-stopped
-        mem_reservation: "2M"
+        mem_reservation: "10M"
         mem_limit: "500M"
         devices:
             - /dev/snd
