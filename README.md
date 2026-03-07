@@ -1,5 +1,5 @@
 # snapclient-docker
-Extremely light container (Alpine base, 26.3MB image size on arm64!) to run a Snapcast server instance.  
+Extremely light container (Alpine base, 26.3MB image size on arm64!) to run a Snapcast client instance.  
 
 I run this on two Le Potatoes that I converted from Armbian to Dietpi with Apple type-C to headphone jacks (👌 mini-DACs).  
 Runs on basically anything Linux that can run Docker and has USB ports.
@@ -27,8 +27,8 @@ This is a volume-less container, so just run `wget https://raw.githubusercontent
 
 Device `/dev/snd`: Just mounts your sound device so that it can see all of your soundcards. This shouldn't break anything mounting the same device across multiple container deployments _if_ you want attach multiple DACs (audio outputs) to the same host.
 
-## command:
--h : Set this to the host of your Snapserver. If your network supports mDNS, use that, but be careful. Test by running `ping snapserver.domain` on any Linux/MacOS/Windows device. If no packet loss, use the domain name.
+## `command:` in [`compose.yml`](compose.yml#L16):
+-h : Set this to the host IP of your Snapserver. If your network supports mDNS, use the domain name, but be careful. Test by running `ping snapserver.domain` on any Linux/MacOS/Windows device. If all 4 pings work, use the domain name. If not, use the LAN IP instead.
 
 -s: Run `aplay -L` on the host (don't use with `aplay -l`, snapclient identifies per `-L`) to find your soundcard. You can typically test this by plugging in each soundcard one at a time and looking at `dmesg`.  
 
