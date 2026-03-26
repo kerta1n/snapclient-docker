@@ -2,7 +2,7 @@ FROM alpine:latest
 
 LABEL maintainer="kerta1n"
 
-ARG SNAPCAST_VERSION=0.34.0-r0
+ARG SNAPCAST_VERSION=0.35.0-r0
 
 # ENV HOST=""
 # ENV SOUNDCARD=""
